@@ -1,4 +1,5 @@
-﻿using GXPEngine.BodyParts;
+﻿using System;
+using GXPEngine.BodyParts;
 using GXPEngine.StageManagement;
 
 namespace GXPEngine;
@@ -38,7 +39,10 @@ public class MyGame : Game
     private void Update()
     {
         Scroll();
-        
+
+        Console.WriteLine($"Fps: {currentFps}");
+        Console.WriteLine($"Time.dT {Time.deltaTime}");
+
         // Console.WriteLine($"Time: {Time.deltaTime}");
         
         //Red
@@ -46,7 +50,7 @@ public class MyGame : Game
         if (Input.GetKeyDown(Key.NUMPAD_2) || Input.GetKeyDown(50)) player.SetLowerBodyPart(new JumpingLegs(player));
         
         //Blue
-        if (Input.GetKeyDown(Key.NUMPAD_3) || Input.GetKeyDown(51)) player.SetUpperBodyPart(new BlueUpperBodyPart(player));
+        if (Input.GetKeyDown(Key.NUMPAD_3) || Input.GetKeyDown(51)) player.SetUpperBodyPart(new StrongArm(player));
         if (Input.GetKeyDown(Key.NUMPAD_4) || Input.GetKeyDown(52)) player.SetLowerBodyPart(new ExtendyLegs(player));
 
         //Green
@@ -60,10 +64,7 @@ public class MyGame : Game
             player.SetXY(initialPlayerPosition.x, initialPlayerPosition.y);
         }
 
-
         
-        
-
         // if (player.upperBodyPart is GrapplingHook grapplingHook && grapplingHook.hook != null)
         // {
         //     background.Clear(SKColors.LightCyan);
@@ -71,13 +72,13 @@ public class MyGame : Game
         //     background.Line(player.upperBodyPart.,player.upperBodyPart.y,grapplingHook.hook.x,grapplingHook.hook.y);
         // }
     }
-    
+
     void Scroll()
     {
-        if (StageLoader.currentStage == null) return;
-        
-        //If the player is to the left of the center of the screen it will move to the left with the player until it hits the start of the stage
-        if (player.x + StageLoader.currentStage.x < scrollX)
+        if (StageLoader.currentStage == null || player == null) return;
+
+    //If the player is to the left of the center of the screen it will move to the left with the player until it hits the start of the stage
+    if (player.x + StageLoader.currentStage.x < scrollX)
         {
             StageLoader.currentStage.x = scrollX - player.x;
         }

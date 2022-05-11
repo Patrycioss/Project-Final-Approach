@@ -10,7 +10,7 @@
     <RootNamespace>GXPEngine</RootNamespace>
     <AssemblyName>GXPEngine</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <LangVersion>10</LangVersion>
+    <LangVersion>default</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -39,10 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation.cs" />
     <Compile Include="BodyParts\AllBodyParts.cs" />
     <Compile Include="BodyParts\BodyPart.cs" />
     <Compile Include="BodyParts\LowerBodyPart.cs" />
     <Compile Include="BodyParts\UpperBodyPart.cs" />
+    <Compile Include="BreakableStuffs\Breakable.cs" />
+    <Compile Include="BreakableStuffs\BreakableBlocks.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
