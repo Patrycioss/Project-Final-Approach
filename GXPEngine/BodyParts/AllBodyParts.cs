@@ -86,7 +86,7 @@ namespace GXPEngine.BodyParts
             }
             else if (hook == null)
             {
-                shootingSound.Play(volume: 0.5f);
+                shootingSound.Play(volume: 0.1f);
                 pulling = false;
 
                 Vec2 newPosition = new Vec2(player.x + abilityModel.x,player.y + abilityModel.y);
