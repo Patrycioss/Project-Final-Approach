@@ -1,4 +1,4 @@
-//#define USE_FMOD_AUDIO
+#define USE_FMOD_AUDIO
 #define STRETCH_ON_RESIZE
 
 using System;

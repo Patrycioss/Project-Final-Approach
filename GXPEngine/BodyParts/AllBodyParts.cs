@@ -47,6 +47,9 @@ namespace GXPEngine.BodyParts
         private readonly float pullPowerIncrement;
         private readonly float maxPullPower;
 
+        private Sound shootingSound;
+        
+
         public GrapplingHook(Player player_) : base("bodyParts/monkey-small.png", 1, 1, 1, player_)
         {
             model.SetXY(0,-18);
@@ -55,6 +58,9 @@ namespace GXPEngine.BodyParts
             abilityModel.x = 15;
             abilityModel.y = 5;
 
+            shootingSound = new Sound("sounds/shoot.wav");
+            
+            
             
             grapplePower = 1.5f;
             pullPower = 0.05f;
@@ -80,6 +86,7 @@ namespace GXPEngine.BodyParts
             }
             else if (hook == null)
             {
+                shootingSound.Play(volume: 0.5f);
                 pulling = false;
 
                 Vec2 newPosition = new Vec2(player.x + abilityModel.x,player.y + abilityModel.y);
@@ -211,13 +218,27 @@ namespace GXPEngine.BodyParts
         private AnimationSprite tracks;
 
         private float extendedPart;
-        
-        
+
+        private Sound extending;
+        private float playedSound;
+        private SoundChannel soundChannel;
+        private IntPtr soundId;
+
+        private SoloudSoundSystem soundSystem;
+
         public ExtendyLegs(Player player_) : base("bodyParts/extend_part-small.png", 1, 1,1, player_)
         {
             tracks = new AnimationSprite("bodyParts/extender-small.png", 10, 2, 19);
             AddChild(tracks);
 
+            extending = new Sound("sounds/extendo.wav", looping: false);
+
+
+            soundChannel = new SoundChannel(30);
+        
+            
+            
+            playedSound = 0;
             extendedPart = 0;
             
             Console.WriteLine(model.height);
@@ -233,7 +254,7 @@ namespace GXPEngine.BodyParts
             jumpMultiplier = 0;
             speedMultiplier = 1;
             speed = MyGame.globalSpeed * speedMultiplier;
-            extendSpeed = 2;
+            extendSpeed = 1;
             crouchIntensity = 0.02f;
 
             maxExtendiness = (int) MyGame.playerBaseSize.y * 6;
@@ -257,10 +278,26 @@ namespace GXPEngine.BodyParts
             {
                 tracks.SetCycle(0, 19,20);
             }
-            
 
+            if (Input.GetKeyDown(Key.W) || Input.GetKeyDown(Key.S))
+            {
+                extending.Play(volume: 0.1f, channelId: 30);
+            }
+
+            
+            
+            
+            
             if (Input.GetKey(Key.W) && player.height < maxExtendiness)
             {
+                // if (!soundChannel.IsPlaying)
+                // {
+                //     extending.Play(volume: 0.1f, channelId:30);
+                //     playedSound = Time.now;
+                // }
+                
+
+                
                 boundaryCollision = player.MoveUntilCollision(0, -extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
                 if (boundaryCollision == null)
                 {
@@ -273,6 +310,7 @@ namespace GXPEngine.BodyParts
             }
             else if (Input.GetKey(Key.S))
             {
+
                 boundaryCollision = player.MoveUntilCollision(0,extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
                 if (boundaryCollision is {normal: {y: < -0.5f}} && player.height > 21)
                 {
@@ -293,6 +331,7 @@ namespace GXPEngine.BodyParts
                     }
                 }
             }
+            else soundChannel.Stop();
         }
     }
 

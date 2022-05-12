@@ -10,12 +10,16 @@ public class Breakable : Sprite
 
 	protected (string path, int cols, int rows, int frames, float animationDelay) breakAnimationInfo;
 
+
+	private Sound breakSound;
 	
 	public Breakable(int pX, int pY, string filePath = "placeholders/colors.png") : base(filePath)
 	{
 		SetXY(pX,pY);
 
 		breakAnimationInfo = ("", -1, -1, -1, -1);
+
+		breakSound = new Sound("sounds/break.wav");
 		
 		// Console.WriteLine($"{x}, {y}");
 		hitbox = new Hitbox();		
@@ -33,17 +37,7 @@ public class Breakable : Sprite
 
 	public void Break()
 	{
-		// (string path, int cols, int rows, int frames, float animationDelay) = breakAnimationInfo;
-		//
-		// if (path =="" || cols < 0 || rows < 0 || frames < 0 || animationDelay < 0)
-		// {
-		// 	breakAnimationInfo = ("placeholders/placeHolders.png", 4, 1, 4, 255);
-		// 	( path,  cols,  rows,  frames,  animationDelay) = breakAnimationInfo;
-		// }
-		// 	
-		// Animation animation = new (path, cols, rows, frames, true, (byte)animationDelay);
-		// animation.SetXY(x,y);
-		// StageLoader.currentStage?.animations.AddChild(animation);
+		breakSound.Play(volume:0.9f);
 		
 		MakeAnimation();
 		

@@ -7,6 +7,7 @@ public class PrologueManager : Pivot
 {
 	private EasyDraw background;
 	private List<Sprite> pages;
+	private Sound snap;
 
 	public bool isActive;
 
@@ -16,6 +17,8 @@ public class PrologueManager : Pivot
 		background = new EasyDraw(game.width, game.height);
 		background.Clear(Color.Black);
 		AddChild(background);
+
+		snap = new Sound("sounds/snap.wav");
 
 		isActive = true;
 
