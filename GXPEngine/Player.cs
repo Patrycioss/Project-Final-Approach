@@ -59,7 +59,7 @@ public class Player : Sprite
 		if (upperBodyPart is GrapplingHook grapplingHook)
 		{
 			grapplingHook.hook?.Kill();
-			StageLoader.currentStage?.background.Clear(Color.LightCyan);
+			StageLoader.currentStage?.drawing.ClearTransparent();
 		}
 
 
@@ -78,15 +78,15 @@ public class Player : Sprite
 		// }
 
 		Console.WriteLine(lowerBodyPart?.model.height);
-		
-		if (lowerBodyPart?.model.height is > 32 or < 32)
+
+		if (lowerBodyPart is ExtendyLegs && lowerBodyPart.model.height != 32)
 		{
-				int temp = lowerBodyPart.model.height - (int)MyGame.partBaseSize.y;
-				height -= temp;
-				if (lowerBodyPart != null) y += temp;
+			int temp = height - 32;
+			height -= temp;
+			if (lowerBodyPart != null) y += temp;
 		}
-		
-		
+
+
 		lowerBodyPart?.Destroy();
 		lowerBodyPart = newBodyPart;
 		lowerBodyPart?.SetXY(x,y + 32);
@@ -100,6 +100,21 @@ public class Player : Sprite
 
 	private void Update()
 	{
+		if (StageLoader.currentStage is {comicActive: true})
+		{
+			visible = false;
+			if (lowerBodyPart != null) lowerBodyPart.visible = false;
+			if (upperBodyPart != null) upperBodyPart.visible = false;
+			return;
+		}
+		else
+		{
+			visible = true;
+			if (lowerBodyPart != null) lowerBodyPart.visible = true;
+			if (upperBodyPart != null) upperBodyPart.visible = true;
+		}
+		
+		
 		wasGrounded = isGrounded;
 		
 		lowerBodyPart?.HandleMovement();

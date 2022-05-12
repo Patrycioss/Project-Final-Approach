@@ -1,6 +1,9 @@
 ﻿using System;
-using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime;
+using System.Text;
 using GXPEngine.BreakableStuffs;
+using GXPEngine.Comics;
 using GXPEngine.Visual;
 using TiledMapParser;
 
@@ -34,9 +37,15 @@ namespace GXPEngine.StageManagement
         public SpriteBatch spriteBatch;
         public Pivot backgroundSprites;
 
-        public EasyDraw background;
+        public Sprite background;
+        public EasyDraw drawing;
 
         private bool stageLoaded = false;
+
+        public PrologueManager prologueManager;
+        public EpilogueManager epilogueManager;
+
+        public bool comicActive;
 
         
 
@@ -49,13 +58,15 @@ namespace GXPEngine.StageManagement
             myGame = (MyGame) game;
             parent = myGame;
 
-
+            
             surfaces = new Pivot();
             grappleSurfaces = new Pivot();
             climbableSurfaces = new Pivot();
             breakableBlocks = new Pivot();
             animations = new Pivot();
-            
+
+            prologueManager = new PrologueManager();
+            epilogueManager = new EpilogueManager();
             
             stage = givenStage;
             string stagePath = "Tiled/" + stage + ".tmx";
@@ -69,10 +80,17 @@ namespace GXPEngine.StageManagement
             tileHeight = stageData.TileHeight;
             stageWidth = stageData.Width * tileWidth;
             stageHeight = stageData.Height * tileHeight;
+            
+            AddChildAt(epilogueManager,0);
+            
 
-            background = new EasyDraw(stageWidth, stageHeight, false);
-            background.Clear(Color.LightCyan);
-            AddChildAt(background,0);
+            background = new Sprite("fullBackground.png");
+            AddChildAt(background,1);
+            
+            
+            drawing = new EasyDraw(stageWidth, stageHeight, false);
+            drawing.ClearTransparent();
+            AddChildAt(drawing,2);
 
             
 
@@ -92,6 +110,12 @@ namespace GXPEngine.StageManagement
                 LoadStage();
                 stageLoaded = true;
             }
+
+
+            comicActive = false;
+
+            if (prologueManager is {isActive: true}) comicActive = true;
+            if (epilogueManager is {isActive: true}) comicActive = true;
             
             
             
@@ -211,6 +235,9 @@ namespace GXPEngine.StageManagement
                     //Player
                     case 13:
                         myGame.player = new Player(pX, pY - 13);
+                        myGame.player.visible = false;
+                        if (myGame.player.upperBodyPart != null) myGame.player.upperBodyPart.visible = false;
+                        if (myGame.player.lowerBodyPart != null) myGame.player.lowerBodyPart.visible = false;
                         MyGame.initialPlayerPosition = new Vec2(pX, pY - 13);
                         AddChildAt(myGame.player, 4);
                         break;
@@ -240,10 +267,10 @@ namespace GXPEngine.StageManagement
                 }
             }
             
-            AddChildAt(spriteBatch, 1);
+            AddChildAt(spriteBatch, 3);
             spriteBatch.Freeze();
             
-            AddChildAt(backgroundSprites,2);
+            AddChildAt(backgroundSprites,4);
 
 
             foreach (ObjectGroup objectGroup in stageData.ObjectGroups)
@@ -289,6 +316,7 @@ namespace GXPEngine.StageManagement
             AddChild(surfaces);
             AddChild(breakableBlocks);
             AddChild(animations);
+            AddChild(prologueManager);
         }
     }
 }

@@ -39,13 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
     <Compile Include="BodyParts\AllBodyParts.cs" />
     <Compile Include="BodyParts\BodyPart.cs" />
     <Compile Include="BodyParts\LowerBodyPart.cs" />
     <Compile Include="BodyParts\UpperBodyPart.cs" />
     <Compile Include="BreakableStuffs\Breakable.cs" />
     <Compile Include="BreakableStuffs\BreakableBlocks.cs" />
+    <Compile Include="Comics\EpilogueManager.cs" />
+    <Compile Include="Comics\PrologueManager.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="StageManagement\StageLoader.cs" />
     <Compile Include="StageManagement\Stages.cs" />
     <Compile Include="Vec2.cs" />
+    <Compile Include="Visual\Animation.cs" />
     <Compile Include="Visual\Blocks.cs" />
   </ItemGroup>
 </Project>

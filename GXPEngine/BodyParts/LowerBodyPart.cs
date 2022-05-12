@@ -22,6 +22,20 @@ public class LowerBodyPart : BodyPart
     protected override void Update()
     {
 
+        if (StageLoader.currentStage is {comicActive:true})
+        {
+            disableKeyAndGravityMovement = true;
+        }
+        else if (this is SpiderLegs spiderLegs)
+        {
+            if (spiderLegs.inSpiderForm)
+            {
+                disableKeyAndGravityMovement = true;
+            }
+            else disableKeyAndGravityMovement = false;
+        }
+        else disableKeyAndGravityMovement = false;
+        
         // Console.WriteLine($"State: {player.currentState}");
         //
         // if (player.verticalCollision != null)

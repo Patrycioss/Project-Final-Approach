@@ -65,7 +65,7 @@ public class Hook : Sprite
     {
         GrapplingHook? grapplingHook = (GrapplingHook) myGame.player.upperBodyPart!;
         grapplingHook.hook = null;
-        StageLoader.currentStage.background.Clear(Color.LightCyan);
+        StageLoader.currentStage.drawing.ClearTransparent();
         Destroy();
     }
 }

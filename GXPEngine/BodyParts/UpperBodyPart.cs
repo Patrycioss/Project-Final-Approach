@@ -55,8 +55,6 @@ public abstract class UpperBodyPart : BodyPart
 
         if (addCollider_) abilityModel.collider.isTrigger = true;
         
-        abilityModel.SetXY(x + MyGame.playerBaseSize.x / 2, y + MyGame.partBaseSize.y/2);
-        abilityModel.SetOrigin(MyGame.playerBaseSize.x/4, MyGame.partBaseSize.y/2);
         
         abilityDirection = MyGame.mousePos - new Vec2(x + MyGame.playerBaseSize.x / 2, y + MyGame.partBaseSize.y);
 

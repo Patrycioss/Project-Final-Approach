@@ -14,9 +14,8 @@ namespace GXPEngine.BodyParts
     public class JumpingLegs : LowerBodyPart {
         public JumpingLegs(Player player_) : base("bodyParts/jumper-small.png", 10, 2, 19, player_)
         {
-            // SetScaleXY(0.5f);
-            
             model.SetXY(0,-16);
+            model.SetCycle(0,1);
             
             jumpMultiplier = 1;
             speedMultiplier = 1;
@@ -27,9 +26,15 @@ namespace GXPEngine.BodyParts
         protected override void Update()
         {
             base.Update();
-            
             model.Mirror(!player.mirrored,false);
             model.Animate(Time.deltaTime);
+
+            if (Input.GetKey(Key.D) || Input.GetKey(Key.A))
+            {
+                model.SetCycle(0, 19, 15);
+            }
+            else model.SetCycle(5,1);
+
         }
     }
 
@@ -38,31 +43,34 @@ namespace GXPEngine.BodyParts
         private readonly float grapplePower;
         public Hook? hook;
         private bool pulling;
-        private readonly float pullStartingPower;
         private float pullPower;
         private readonly float pullPowerIncrement;
         private readonly float maxPullPower;
-        private int shootTime;
-        
-        public GrapplingHook(Player player_) : base("bodyParts/test/red/upper.png", 1, 1, 1, player_)
-        {
-            SetAbilityModel("bodyParts/test/red/ability.png",1,1,1, addCollider_:true);
 
+        public GrapplingHook(Player player_) : base("bodyParts/monkey-small.png", 1, 1, 1, player_)
+        {
+            model.SetXY(0,-18);
+            SetAbilityModel("bodyParts/monkey_arm-small.png",1,1,1, addCollider_:true);
+            abilityModel.SetOrigin(1,15);
+            abilityModel.x = 15;
+            abilityModel.y = 5;
+
+            
             grapplePower = 1.5f;
             pullPower = 0.05f;
-            pullStartingPower = MyGame.globalSpeed * pullPower;
-            
+
             pullPowerIncrement = 0.01f;
             maxPullPower = 1;
             
-
-
+            
+            
             hook = null;
             pulling = false;
         }
 
         protected override void UseAbility()
         {
+            if (StageLoader.currentStage is {comicActive: true}) return;
             if (abilityModel == null) return;
 
             if (hook != null && !pulling && hook.hasHit)
@@ -73,8 +81,6 @@ namespace GXPEngine.BodyParts
             else if (hook == null)
             {
                 pulling = false;
-
-                shootTime = Time.now;
 
                 Vec2 newPosition = new Vec2(player.x + abilityModel.x,player.y + abilityModel.y);
                 
@@ -97,12 +103,17 @@ namespace GXPEngine.BodyParts
             
             player.lowerBodyPart!.disableKeyAndGravityMovement = false;
             
-            StageLoader.currentStage?.background.Clear(Color.LightCyan);
+            StageLoader.currentStage?.drawing.ClearTransparent();
         }
 
         protected override void Update()
         {
             abilityModel?.Animate(Time.deltaTime);
+            // abilityModel.Mirror(abilityModel.rotation > 0,false);
+
+            
+            model.Mirror(!player.mirrored,false);
+            model.Animate(Time.deltaTime);
 
             if (abilityModel != null)
             {
@@ -138,13 +149,13 @@ namespace GXPEngine.BodyParts
                 
                 
                 
-                StageLoader.currentStage?.background.Clear(Color.LightCyan);
-                StageLoader.currentStage?.background.Stroke(Color.Brown);
+                StageLoader.currentStage?.drawing.ClearTransparent();
+                StageLoader.currentStage?.drawing.Stroke(Color.Brown);
                 
                 if (abilityModel != null)
                 {
 
-                    StageLoader.currentStage?.background.Line(x + abilityModel.x, y + abilityModel.y, hook.x, hook.y);
+                    StageLoader.currentStage?.drawing.Line(x + abilityModel.x, y + abilityModel.y, hook.x, hook.y);
                     
                     if (!hook.HitTest(player) && !hook.HitTest(this))
                     {
@@ -156,7 +167,7 @@ namespace GXPEngine.BodyParts
 
                 if (!hook.hasHit)
                 {
-                    if (direction.Magnitude() > 400) CancelAbility();
+                    if (direction.Magnitude() > 450) CancelAbility();
                 }
 
 
@@ -196,11 +207,28 @@ namespace GXPEngine.BodyParts
         private readonly int extendSpeed;
         private readonly float crouchIntensity;
         private readonly int maxExtendiness;
+
+        private AnimationSprite tracks;
+
+        private float extendedPart;
         
-        public ExtendyLegs(Player player_) : base("bodyParts/extender-small.png", 10, 2,19, player_)
+        
+        public ExtendyLegs(Player player_) : base("bodyParts/extend_part-small.png", 1, 1,1, player_)
         {
+            tracks = new AnimationSprite("bodyParts/extender-small.png", 10, 2, 19);
+            AddChild(tracks);
+
+            extendedPart = 0;
+            
+            Console.WriteLine(model.height);
+            
             // model.SetScaleXY(0.5f);
             model.SetXY(0,-16);
+            tracks.SetXY(0,model.y);
+            
+            tracks.x = (player_.mirrored ? -2 : 2);
+
+            model.x = (player_.mirrored ? -2 : 2);
             
             jumpMultiplier = 0;
             speedMultiplier = 1;
@@ -216,16 +244,20 @@ namespace GXPEngine.BodyParts
             base.HandleMovement();
 
             model.Mirror(!player.mirrored,false);
-            model.Animate(Time.deltaTime);
+            tracks.Mirror(!player.mirrored,false);
             
-            
+            model.x = (player.mirrored ? -2 : 2);
+            tracks.x = (player.mirrored ? -2 : 2);
+
             Collision? boundaryCollision;
 
-            
-            // Console.WriteLine($"State: {player.currentState}");
-            // Console.WriteLine($"VerticalCol: {player.verticalCollision?.other}");
-            // Console.WriteLine($"HorizontalCol: {player.horizontalCollision?.other.x}");
+            Console.WriteLine(player.height);
 
+            if (Input.GetKey(Key.A) || Input.GetKey(Key.D))
+            {
+                tracks.SetCycle(0, 19,20);
+            }
+            
 
             if (Input.GetKey(Key.W) && player.height < maxExtendiness)
             {
@@ -234,18 +266,32 @@ namespace GXPEngine.BodyParts
                 {
                     player.height += extendSpeed;
                     model.height += extendSpeed;
+                    
+                    tracks.y += extendSpeed;
+                    extendedPart += extendSpeed;
                 }
             }
             else if (Input.GetKey(Key.S))
             {
                 boundaryCollision = player.MoveUntilCollision(0,extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
-                if (boundaryCollision is {normal: {y: < -0.5f}} && model.height > 21)
+                if (boundaryCollision is {normal: {y: < -0.5f}} && player.height > 21)
                 {
                     player.height -= extendSpeed;
                     model.height -= extendSpeed;
+
+                    // if (player.height < 32) model.visible = false;
+                    // else model.visible = true;
+
+                    if (extendedPart >= extendSpeed)
+                    {
+                        tracks.y -= extendSpeed;
+                        extendedPart -= extendSpeed;
+                    }
+                    else
+                    {
+                        tracks.y -= extendSpeed;
+                    }
                 }
-
-
             }
         }
     }
@@ -255,16 +301,17 @@ namespace GXPEngine.BodyParts
         public StrongArm(Player player_) : base("bodyParts/puncher.png", 5, 8, 40, player_)
         {
             model.SetScaleXY(0.5f);
-            model.SetXY(-8,-16);
+            model.SetXY(0,-16);
             model.Mirror(!player.mirrored,false);
             SetAbilityModel("bodyParts/test/blue/ability.png",1,1,1, true,player.mirrored?180:360);
+            model.SetCycle(0, 1, 30);
+
+            abilityModel.x = player.mirrored ? 20 : -20;
+            abilityModel.visible = false;
         }
         protected override void UseAbility()
         {
-            foreach (Breakable breakableBlock in StageLoader.currentStage.breakableBlocks.GetChildren())
-            {
-                if (abilityModel.HitTest(breakableBlock)) breakableBlock.Break(); 
-            }
+            model.SetCycle(0, 40, 30);
         }
 
         protected override void Update()
@@ -277,12 +324,33 @@ namespace GXPEngine.BodyParts
 
             if (player.mirrored)
             {
-                model.x = -24;
+                model.x = -26;
+                abilityModel.x = 0;
+                abilityModel.y = 10;
+
             }
-            else model.x = -8;
+            else
+            {
+                model.x = -7;
+                abilityModel.x = 20;
+                abilityModel.y = -10;
+            }
 
 
-            abilityModel.visible = false;
+            Console.WriteLine(model.currentFrame);
+            
+            if (model.currentFrame == 39)
+            {
+                foreach (Breakable breakableBlock in StageLoader.currentStage.breakableBlocks.GetChildren())
+                {
+                    if (abilityModel.HitTest(breakableBlock)) breakableBlock.Break(); 
+                }
+                model.SetCycle(0,1);
+            }
+
+
+            
+            // abilityModel.visible = false;
             abilityModel.rotation = player.mirrored ? 180 : 360;
         }
     }
@@ -290,11 +358,14 @@ namespace GXPEngine.BodyParts
     //Green
     public class SpiderLegs : LowerBodyPart
     {
-        private bool inSpiderForm;
+        public bool inSpiderForm;
         private float climbSpeed;
 
-        public SpiderLegs(Player player_) : base("bodyParts/spiderNormal-small.png", 10, 2, 19, player_)
+        private bool wasInSpiderForm;
+
+        public SpiderLegs(Player player_) : base("bodyParts/spider-small.png", 10, 4, 39, player_)
         {
+            model.SetCycle(0,1,20);
             model.SetXY(0,-16);
             jumpMultiplier = 0;
             inSpiderForm = false;
@@ -328,14 +399,15 @@ namespace GXPEngine.BodyParts
                     {
                         inSpiderForm = true;
                     }
-
-                    // if (Input.GetKeyDown(Key.W) || Input.GetKeyDown(Key.S))
-                    // {
-                    //     climbKeyPressed = true;
-                    // }
                 }
             }
-            
+
+            if (Input.GetKey(Key.W) || Input.GetKey(Key.A) || Input.GetKey(Key.D) || Input.GetKey(Key.S))
+            {
+                model.SetCycle(inSpiderForm ? 0 : 20, 19, 20);
+            }
+            else model.SetCycle(inSpiderForm? 0 : 20,1);
+
             // if (inSpiderForm == false && climbKeyPressed)
             // {
             //     climbKeyPressed = false;
@@ -349,6 +421,8 @@ namespace GXPEngine.BodyParts
             // if (inSpiderForm && climbKeyPressed)
             if (inSpiderForm)
             {
+                
+                
                 if (Input.GetKey(Key.W))
                 {
                     player.MoveUntilCollision(0, -climbSpeed * Time.deltaTime, StageLoader.currentStage.surfaces.GetChildren());

@@ -1,4 +1,6 @@
 ﻿using GXPEngine.StageManagement;
+using GXPEngine.Visual;
+
 namespace GXPEngine.BreakableStuffs;
 
 public class WallNormal : Breakable
