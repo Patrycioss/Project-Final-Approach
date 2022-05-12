@@ -13,7 +13,7 @@ public class EpilogueManager : Pivot
 
 	public EpilogueManager()
 	{
-		background = new EasyDraw(game.width, game.height);
+		background = new EasyDraw(4800, game.height);
 		background.Clear(Color.Black);
 		AddChild(background);
 

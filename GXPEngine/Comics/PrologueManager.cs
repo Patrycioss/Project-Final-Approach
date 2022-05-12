@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-
 namespace GXPEngine.Comics;
 public class PrologueManager : Pivot
 {
@@ -14,7 +13,7 @@ public class PrologueManager : Pivot
 
 	public PrologueManager()
 	{
-		background = new EasyDraw(game.width, game.height);
+		background = new EasyDraw(4800, game.height);
 		background.Clear(Color.Black);
 		AddChild(background);
 
