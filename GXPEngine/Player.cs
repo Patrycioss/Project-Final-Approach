@@ -49,21 +49,20 @@ public class Player : Sprite
 
 	public void SetUpperBodyPart(UpperBodyPart? newBodyPart)
 	{
-		if (upperBodyPart?.model.height > MyGame.partBaseSize.y)
-		{
-			int temp = upperBodyPart.model.height - (int) MyGame.partBaseSize.y;
-			height -= temp;
-			if (lowerBodyPart != null) lowerBodyPart.y -= temp;
-		}
+		// if (upperBodyPart?.model.height > MyGame.partBaseSize.y)
+		// {
+		// 	int temp = upperBodyPart.model.height - (int) MyGame.partBaseSize.y;
+		// 	height -= temp;
+		// 	if (lowerBodyPart != null) lowerBodyPart.y -= temp;
+		// }
 		
 		if (upperBodyPart is GrapplingHook grapplingHook)
 		{
-			grapplingHook.hook?.Destroy();
-			grapplingHook.hook = null;
+			grapplingHook.hook?.Kill();
 			StageLoader.currentStage?.background.Clear(Color.LightCyan);
 		}
-		
-		
+
+
 		upperBodyPart?.Destroy();
 		upperBodyPart = newBodyPart;
 		upperBodyPart?.SetXY(x, y);
@@ -71,19 +70,29 @@ public class Player : Sprite
 
 	public void SetLowerBodyPart(LowerBodyPart? newBodyPart)
 	{
-		if (lowerBodyPart?.model.height > MyGame.partBaseSize.y || lowerBodyPart?.model.height < MyGame.partBaseSize.y)
+		// if (lowerBodyPart?.model.height > MyGame.partBaseSize.y || lowerBodyPart?.model.height < MyGame.partBaseSize.y)
+		// {
+		// 	int temp = lowerBodyPart.model.height - (int)MyGame.partBaseSize.y;
+		// 	height -= temp;
+		// 	if (lowerBodyPart != null) y += temp;
+		// }
+
+		Console.WriteLine(lowerBodyPart?.model.height);
+		
+		if (lowerBodyPart?.model.height is > 32 or < 32)
 		{
-			int temp = lowerBodyPart.model.height - (int)MyGame.partBaseSize.y;
-			height -= temp;
-			if (lowerBodyPart != null) y += temp;
+				int temp = lowerBodyPart.model.height - (int)MyGame.partBaseSize.y;
+				height -= temp;
+				if (lowerBodyPart != null) y += temp;
 		}
+		
 		
 		lowerBodyPart?.Destroy();
 		lowerBodyPart = newBodyPart;
-		lowerBodyPart?.SetXY(x,y+MyGame.partBaseSize.y);
+		lowerBodyPart?.SetXY(x,y + 32);
 		
 		
-		if (lowerBodyPart != null && lastVerticalCollision != null && HitTest(lastVerticalCollision.other)) y -= MyGame.partBaseSize.y;
+		if (lowerBodyPart != null && lastVerticalCollision != null && HitTest(lastVerticalCollision.other)) y -= 32;
 		
 		lowerBodyPart?.CheckIfGrounded();
 	}

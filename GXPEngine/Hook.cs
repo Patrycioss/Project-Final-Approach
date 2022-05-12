@@ -55,18 +55,13 @@ public class Hook : Sprite
             }
         }
         
-       
-            
-            
-       
-
         if (x > StageLoader.currentStage.stageWidth + width || x < -width || y > StageLoader.currentStage.stageHeight + height || y < -height)
         {
             Kill();
         }
     }
 
-    private void Kill()
+    public void Kill()
     {
         GrapplingHook? grapplingHook = (GrapplingHook) myGame.player.upperBodyPart!;
         grapplingHook.hook = null;

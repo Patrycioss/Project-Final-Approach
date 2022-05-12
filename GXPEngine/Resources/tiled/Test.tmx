@@ -90,7 +90,7 @@
   <object id="79" x="1439.82" y="182.009" width="224.182" height="25.8096"/>
   <object id="80" x="1728.03" y="294.012" width="224.849" height="25.954"/>
   <object id="81" x="2080" y="245.993" width="191.515" height="26.0035"/>
-  <object id="82" x="1536.32" y="86.0027" width="95.5881" height="96.0453"/>
+  <object id="82" x="1536" y="86.0027" width="95.9081" height="96.0453"/>
   <object id="89" x="1120" y="181.99" width="192.065" height="159.969"/>
   <object id="90" x="1120" y="16.0026" width="192.02" height="95.9928"/>
   <object id="101" x="2400" y="464.5" width="31.9944" height="230"/>
@@ -126,7 +126,7 @@
   <object id="72" x="1247.5" y="399.5" width="32.75" height="128.5"/>
   <object id="78" x="1023.99" y="47.9944" width="96.0102" height="32.0098"/>
   <object id="84" x="1535.98" y="85.7821" width="0.692898" height="96.2335"/>
-  <object id="87" x="1631.8" y="85.9279" width="0.196709" height="96.0799"/>
+  <object id="87" x="1536" y="85.9279" width="95.9967" height="96.0799"/>
   <object id="117" x="2623.99" y="127.996" width="128.008" height="143.988"/>
  </objectgroup>
 </map>

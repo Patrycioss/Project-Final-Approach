@@ -1,5 +1,4 @@
-﻿using GXPEngine.GXPEngine.Core;
-
+﻿
 namespace GXPEngine.BodyParts;
 
 public abstract class UpperBodyPart : BodyPart

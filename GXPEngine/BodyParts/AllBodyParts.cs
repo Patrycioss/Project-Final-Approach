@@ -12,12 +12,24 @@ namespace GXPEngine.BodyParts
     
     //Red
     public class JumpingLegs : LowerBodyPart {
-        public JumpingLegs(Player player_) : base("bodyParts/test/red/lower.png", 1, 1, 1, player_)
+        public JumpingLegs(Player player_) : base("bodyParts/jumper-small.png", 10, 2, 19, player_)
         {
+            // SetScaleXY(0.5f);
+            
+            model.SetXY(0,-16);
+            
             jumpMultiplier = 1;
             speedMultiplier = 1;
 
             speed = speedMultiplier * MyGame.globalSpeed;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            
+            model.Mirror(!player.mirrored,false);
+            model.Animate(Time.deltaTime);
         }
     }
 
@@ -185,13 +197,16 @@ namespace GXPEngine.BodyParts
         private readonly float crouchIntensity;
         private readonly int maxExtendiness;
         
-        public ExtendyLegs(Player player_) : base("bodyParts/test/blue/lower.png", 1, 1, 1, player_)
+        public ExtendyLegs(Player player_) : base("bodyParts/extender-small.png", 10, 2,19, player_)
         {
+            // model.SetScaleXY(0.5f);
+            model.SetXY(0,-16);
+            
             jumpMultiplier = 0;
             speedMultiplier = 1;
             speed = MyGame.globalSpeed * speedMultiplier;
             extendSpeed = 2;
-            crouchIntensity = 0.2f;
+            crouchIntensity = 0.02f;
 
             maxExtendiness = (int) MyGame.playerBaseSize.y * 6;
         }
@@ -200,6 +215,10 @@ namespace GXPEngine.BodyParts
         {
             base.HandleMovement();
 
+            model.Mirror(!player.mirrored,false);
+            model.Animate(Time.deltaTime);
+            
+            
             Collision? boundaryCollision;
 
             
@@ -208,7 +227,7 @@ namespace GXPEngine.BodyParts
             // Console.WriteLine($"HorizontalCol: {player.horizontalCollision?.other.x}");
 
 
-            if (Input.GetKey(Key.UP) && player.height < maxExtendiness)
+            if (Input.GetKey(Key.W) && player.height < maxExtendiness)
             {
                 boundaryCollision = player.MoveUntilCollision(0, -extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
                 if (boundaryCollision == null)
@@ -217,10 +236,10 @@ namespace GXPEngine.BodyParts
                     model.height += extendSpeed;
                 }
             }
-            else if (Input.GetKey(Key.DOWN))
+            else if (Input.GetKey(Key.S))
             {
                 boundaryCollision = player.MoveUntilCollision(0,extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
-                if (boundaryCollision is {normal: {y: < -0.5f}} && player.height > MyGame.partBaseSize.y*(1+crouchIntensity))
+                if (boundaryCollision is {normal: {y: < -0.5f}} && model.height > 21)
                 {
                     player.height -= extendSpeed;
                     model.height -= extendSpeed;
@@ -233,8 +252,11 @@ namespace GXPEngine.BodyParts
 
     public class StrongArm : UpperBodyPart
     {
-        public StrongArm(Player player_) : base("bodyParts/test/blue/upper.png", 1, 1, 1, player_)
+        public StrongArm(Player player_) : base("bodyParts/puncher.png", 5, 8, 40, player_)
         {
+            model.SetScaleXY(0.5f);
+            model.SetXY(-8,-16);
+            model.Mirror(!player.mirrored,false);
             SetAbilityModel("bodyParts/test/blue/ability.png",1,1,1, true,player.mirrored?180:360);
         }
         protected override void UseAbility()
@@ -249,7 +271,18 @@ namespace GXPEngine.BodyParts
         {
             base.Update();
             
+            model.Animate(Time.deltaTime);
+            
+            model.Mirror(!player.mirrored,false);
 
+            if (player.mirrored)
+            {
+                model.x = -24;
+            }
+            else model.x = -8;
+
+
+            abilityModel.visible = false;
             abilityModel.rotation = player.mirrored ? 180 : 360;
         }
     }
@@ -260,8 +293,9 @@ namespace GXPEngine.BodyParts
         private bool inSpiderForm;
         private float climbSpeed;
 
-        public SpiderLegs(Player player_) : base("bodyParts/test/green/lower.png", 1, 1, 1, player_)
+        public SpiderLegs(Player player_) : base("bodyParts/spiderNormal-small.png", 10, 2, 19, player_)
         {
+            model.SetXY(0,-16);
             jumpMultiplier = 0;
             inSpiderForm = false;
             speedMultiplier = 1;
@@ -271,6 +305,14 @@ namespace GXPEngine.BodyParts
             const float climbMultiplier = 0.3f;
             climbSpeed = climbMultiplier * speed;
 
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            
+            model.Mirror(!player.mirrored,false);
+            model.Animate(Time.deltaTime);
         }
 
         public override void HandleMovement()

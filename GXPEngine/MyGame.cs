@@ -1,5 +1,4 @@
-﻿using System;
-using GXPEngine.BodyParts;
+﻿using GXPEngine.BodyParts;
 using GXPEngine.StageManagement;
 
 namespace GXPEngine;
@@ -8,7 +7,7 @@ public class MyGame : Game
 {
     public Player player;
 
-    public static Vec2 partBaseSize = new(32,16);
+    public static Vec2 partBaseSize = new(32,32);
     public static Vec2 playerBaseSize = new(32, 32);
     public static Vec2 initialPlayerPosition = new Vec2(0, 0);
     public static float globalGravity = 0.01f;
@@ -46,16 +45,16 @@ public class MyGame : Game
         // Console.WriteLine($"Time: {Time.deltaTime}");
         
         //Red
-        if (Input.GetKeyDown(Key.NUMPAD_1) || Input.GetKeyDown(49)) player.SetUpperBodyPart(new GrapplingHook(player));
-        if (Input.GetKeyDown(Key.NUMPAD_2) || Input.GetKeyDown(50)) player.SetLowerBodyPart(new JumpingLegs(player));
+        if (Input.GetKeyDown(Key.NUMPAD_1) || Input.GetKeyDown(Key.Q)) player.SetUpperBodyPart(new GrapplingHook(player));
+        if (Input.GetKeyDown(Key.NUMPAD_2) || Input.GetKeyDown(49)) player.SetLowerBodyPart(new JumpingLegs(player));
         
         //Blue
-        if (Input.GetKeyDown(Key.NUMPAD_3) || Input.GetKeyDown(51)) player.SetUpperBodyPart(new StrongArm(player));
-        if (Input.GetKeyDown(Key.NUMPAD_4) || Input.GetKeyDown(52)) player.SetLowerBodyPart(new ExtendyLegs(player));
+        if (Input.GetKeyDown(Key.NUMPAD_3) || Input.GetKeyDown(Key.E)) player.SetUpperBodyPart(new StrongArm(player));
+        if (Input.GetKeyDown(Key.NUMPAD_4) || Input.GetKeyDown(50)) player.SetLowerBodyPart(new ExtendyLegs(player));
 
         //Green
-        if (Input.GetKeyDown(Key.NUMPAD_5) || Input.GetKeyDown(53)) player.SetUpperBodyPart(new GreenUpperBodyPart(player));
-        if (Input.GetKeyDown(Key.NUMPAD_6) || Input.GetKeyDown(54)) player.SetLowerBodyPart(new SpiderLegs(player));
+        // if (Input.GetKeyDown(Key.NUMPAD_5) || Input.GetKeyDown(53)) player.SetUpperBodyPart(new GreenUpperBodyPart(player));
+        if (Input.GetKeyDown(Key.NUMPAD_6) || Input.GetKeyDown(51)) player.SetLowerBodyPart(new SpiderLegs(player));
         
         if (Input.GetKeyDown(Key.R))
         {

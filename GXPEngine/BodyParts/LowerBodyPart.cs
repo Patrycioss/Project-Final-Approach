@@ -16,6 +16,7 @@ public class LowerBodyPart : BodyPart
     protected LowerBodyPart(string modelPath, int cols, int rows, int frames, Player player_) : base(modelPath, cols, rows, frames, player_)
     {
         disableKeyAndGravityMovement = false;
+        model.SetXY(0,-32);
     }
 
     protected override void Update()
@@ -106,7 +107,7 @@ public class LowerBodyPart : BodyPart
         {
             player.currentState = Player.State.Walk;
         }
-        else if (Input.GetKeyDown(Key.SPACE))
+        else if (Input.GetKeyDown(Key.SPACE) || Input.GetKeyDown(Key.W))
         {
             Jump();
             player.currentState = Player.State.Jump;
@@ -137,7 +138,7 @@ public class LowerBodyPart : BodyPart
             player.mirrored = false;
         }
 
-        if (Input.GetKey(Key.SPACE))
+        if (Input.GetKey(Key.SPACE) || Input.GetKey(Key.W))
         {
             Jump();
             player.currentState = Player.State.Jump;
