@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 
 namespace GXPEngine.Comics;
 public class EpilogueManager : Pivot
@@ -10,6 +11,8 @@ public class EpilogueManager : Pivot
 
 	public bool isActive;
 
+	private Sound snap;
+
 
 	public EpilogueManager()
 	{
@@ -17,13 +20,15 @@ public class EpilogueManager : Pivot
 		background.Clear(Color.Black);
 		AddChild(background);
 
+		snap = new Sound("sounds/snap.wav");
+
 		isActive = false;
 
 		pages = new List<Sprite>();
 		
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 5; i++)
 		{
-			pages.Add(new Sprite($"comics/epilogue/page1/{7-i}small.png"));
+			pages.Add(new Sprite($"comics/epilogue/page1/{5-i}small.png"));
 		}
 		
 		for (int i = 0; i < pages.Count; i++)
@@ -39,7 +44,12 @@ public class EpilogueManager : Pivot
 		{
 			if (pages.Count != 1)
 			{
-				RemoveChild(pages[pages.Count-1]);
+				if (pages.Count == 2)
+				{
+					snap.Play(volume: 0.1f);
+				}
+				
+				RemoveChild(pages[pages.Count-1]); 
 				Console.WriteLine(pages[pages.Count-1]);
 				pages[pages.Count-1].Destroy();
 				pages.RemoveAt(pages.Count-1);

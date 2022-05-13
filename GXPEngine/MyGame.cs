@@ -1,5 +1,4 @@
-﻿using System;
-using GXPEngine.BodyParts;
+﻿using GXPEngine.BodyParts;
 using GXPEngine.StageManagement;
 
 namespace GXPEngine;
@@ -19,8 +18,10 @@ public class MyGame : Game
     private readonly int scrollX;
     
     
-    private MyGame() : base(1200, 720, false)
+    private MyGame() : base(1200, 720, true)
     {
+        game.ShowMouse(true);
+        
         scrollX = width / 2;
         
         targetFps = 60;
