@@ -12,11 +12,19 @@ public class LowerBodyPart : BodyPart
     public bool disableKeyAndGravityMovement;
 
     private AnimationSprite animationSprite;
+
+    protected Sound walkSound;
+    protected SoundChannel channel;
     
     protected LowerBodyPart(string modelPath, int cols, int rows, int frames, Player player_) : base(modelPath, cols, rows, frames, player_)
     {
         disableKeyAndGravityMovement = false;
         model.SetXY(0,-32);
+
+        channel = new SoundChannel(15);
+        channel.Mute = true;
+        walkSound?.Play(channelId: 15);
+
     }
 
     protected override void Update()
@@ -35,13 +43,6 @@ public class LowerBodyPart : BodyPart
             else disableKeyAndGravityMovement = false;
         }
         else disableKeyAndGravityMovement = false;
-        
-        // Console.WriteLine($"State: {player.currentState}");
-        //
-        // if (player.verticalCollision != null)
-        //     Console.WriteLine($"Horizontal Normal: {player.verticalCollision.normal}");
-
-
     }
 
     public virtual void HandleMovement()
@@ -58,19 +59,24 @@ public class LowerBodyPart : BodyPart
             {
                 case Player.State.Stand:
                     StandState();
+                    channel.Mute = true;
                     break;
 
                 case Player.State.Walk:
                     WalkState();
+                    channel.Mute = false;
                     break;
 
                 case Player.State.Jump:
                     JumpState();
+                    channel.Mute = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+        
+        
     }
     
     protected virtual void JumpState()

@@ -21,6 +21,8 @@ namespace GXPEngine.BodyParts
             speedMultiplier = 1;
 
             speed = speedMultiplier * MyGame.globalSpeed;
+
+            walkSound = new Sound("sounds/walking.wav", looping:true);
         }
 
         protected override void Update()
@@ -277,7 +279,7 @@ namespace GXPEngine.BodyParts
 
             if (Input.GetKeyDown(Key.W) || Input.GetKeyDown(Key.S))
             {
-                extending.Play(volume: 0.1f, channelId: 30);
+                // extending.Play(volume: 0.1f, channelId: 30);
             }
 
             
@@ -286,6 +288,8 @@ namespace GXPEngine.BodyParts
             
             if (Input.GetKey(Key.W) && player.height < maxExtendiness)
             {
+                channel.Mute = false;
+
                 // if (!soundChannel.IsPlaying)
                 // {
                 //     extending.Play(volume: 0.1f, channelId:30);
@@ -306,8 +310,10 @@ namespace GXPEngine.BodyParts
             }
             else if (Input.GetKey(Key.S))
             {
+                channel.Mute = false;
 
-                boundaryCollision = player.MoveUntilCollision(0,extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
+                boundaryCollision =
+                    player.MoveUntilCollision(0, extendSpeed, StageLoader.currentStage?.surfaces.GetChildren()!);
                 if (boundaryCollision is {normal: {y: < -0.5f}} && player.height > 21)
                 {
                     player.height -= extendSpeed;
@@ -327,7 +333,7 @@ namespace GXPEngine.BodyParts
                     }
                 }
             }
-            else soundChannel.Stop();
+            else channel.Mute = true;
         }
     }
 

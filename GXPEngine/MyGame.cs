@@ -1,5 +1,4 @@
-﻿using System;
-using GXPEngine.BodyParts;
+﻿using GXPEngine.BodyParts;
 using GXPEngine.StageManagement;
 
 namespace GXPEngine;
@@ -17,17 +16,23 @@ public class MyGame : Game
     
     //From what x does the screen start scrolling
     private readonly int scrollX;
+
+    public Sound music;
     
     
     private MyGame(bool fullScreen, int resolutionX, int resolutionY, int width, int height) : base(width, height, fullScreen, true,resolutionX,resolutionY)
     {
         game.ShowMouse(true);
 
-       
+        music = new Sound("sounds/music.mp3", true);
+        music.Play(volume:0.1f);
+        
         
         scrollX = width / 2;
         
         StageLoader.LoadStage(Stages.Test);
+        
+        
     }
 
     private void Update()
