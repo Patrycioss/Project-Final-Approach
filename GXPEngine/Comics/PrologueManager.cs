@@ -23,6 +23,8 @@ public class PrologueManager : Pivot
 
 		pages = new List<Sprite>();
 		
+		pages.Add(new Sprite("infographicSmall.png"));
+		
 		for (int i = 0; i < 2; i++)
 		{
 			pages.Add(new Sprite($"comics/prologue/page2/{2-i}small.png"));

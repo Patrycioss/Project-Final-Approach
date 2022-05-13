@@ -27,12 +27,9 @@ public class MyGame : Game
         music = new Sound("sounds/music.mp3", true);
         music.Play(volume:0.1f);
         
-        
         scrollX = width / 2;
         
         StageLoader.LoadStage(Stages.Test);
-        
-        
     }
 
     private void Update()
