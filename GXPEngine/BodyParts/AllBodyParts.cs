@@ -42,7 +42,7 @@ namespace GXPEngine.BodyParts
     {
         private readonly float grapplePower;
         public Hook? hook;
-        private bool pulling;
+        public bool pulling;
         private float pullPower;
         private readonly float pullPowerIncrement;
         private readonly float maxPullPower;
@@ -437,6 +437,10 @@ namespace GXPEngine.BodyParts
                     if (player.HitTest(hitbox))
                     {
                         inSpiderForm = true;
+                        if (player.upperBodyPart is GrapplingHook grapplingHook)
+                        {
+                            grapplingHook.hook?.Kill();
+                        }
                     }
                 }
             }

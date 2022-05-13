@@ -1,4 +1,5 @@
-﻿using GXPEngine.BodyParts;
+﻿using System;
+using GXPEngine.BodyParts;
 using GXPEngine.StageManagement;
 
 namespace GXPEngine;
@@ -18,33 +19,36 @@ public class MyGame : Game
     private readonly int scrollX;
     
     
-    private MyGame() : base(1200, 720, true)
+    private MyGame(bool fullScreen, int resolutionX, int resolutionY, int width, int height) : base(width, height, fullScreen, true,resolutionX,resolutionY)
     {
         game.ShowMouse(true);
+
+       
         
         scrollX = width / 2;
         
-        targetFps = 60;
-
         StageLoader.LoadStage(Stages.Test);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(Key.C))
-        {
-            if (StageLoader.currentStage != null)
-            {
-                StageLoader.currentStage.background.Destroy();
-                StageLoader.currentStage.backgroundSprites.Destroy();
-                StageLoader.currentStage.breakableBlocks.Destroy();
-                StageLoader.currentStage.spriteBatch.Destroy();
-                StageLoader.currentStage.epilogueManager.isActive = true;
-            }
-        }
+        // if (Input.GetKeyDown(Key.C))
+        // {
+        //     if (StageLoader.currentStage != null)
+        //     {
+        //         StageLoader.currentStage.background.Destroy();
+        //         StageLoader.currentStage.backgroundSprites.Destroy();
+        //         StageLoader.currentStage.breakableBlocks.Destroy();
+        //         StageLoader.currentStage.spriteBatch.Destroy();
+        //         StageLoader.currentStage.epilogueManager.isActive = true;
+        //     }
+        // }
         
         
         if (StageLoader.currentStage is {comicActive: true}) return;
+        if (player is null) return;
+
+        Console.WriteLine($"PlayerX: {player.x}");
 
         Scroll();
 
@@ -61,13 +65,6 @@ public class MyGame : Game
         //Green
         // if (Input.GetKeyDown(Key.NUMPAD_5) || Input.GetKeyDown(53)) player.SetUpperBodyPart(new GreenUpperBodyPart(player));
         if (Input.GetKeyDown(Key.NUMPAD_6) || Input.GetKeyDown(51)) player.SetLowerBodyPart(new SpiderLegs(player));
-
-        if (Input.GetKeyDown(Key.R))
-        {
-            player.SetUpperBodyPart(new GrapplingHook(player));
-            player.SetLowerBodyPart(new JumpingLegs(player));
-            player.SetXY(initialPlayerPosition.x, initialPlayerPosition.y);
-        }
 
 
         void Scroll()
@@ -100,6 +97,8 @@ public class MyGame : Game
 
     private static void Main()
     {
-        new MyGame().Start();
+        
+        Settings.Load();
+        new MyGame(Settings.fullScreen,Settings.screenResolutionX,Settings.screenResolutionY,Settings.screenWidth,Settings.screenHeight).Start();
     }
 }

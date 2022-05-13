@@ -1,0 +1,5 @@
+screenResolutionX = 1600
+screenResolutionY = 900
+fullScreen = false
+screenWidth = 1200
+screenHeight = 720

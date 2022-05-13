@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Reflection;
+using GXPEngine.StageManagement;
 
 namespace GXPEngine.Comics;
 public class EpilogueManager : Pivot
@@ -33,7 +33,7 @@ public class EpilogueManager : Pivot
 		
 		for (int i = 0; i < pages.Count; i++)
 		{
-			pages[i].SetXY(345.5f,0);
+			if (StageLoader.currentStage != null) pages[i].SetXY(345.5f, 0);
 			AddChild(pages[i]);
 		}
 	}

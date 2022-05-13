@@ -51,49 +51,13 @@ namespace GXPEngine {
 
 		// Resolution values - use these when creating a new MyGame instance:
 		// (Note: for the arcade machine, use ScreenResolutionX,Y = 1600,1200)
-		public static int Width = 800;
-		public static int Height = 600;
-		public static int ScreenResolutionX = 800;
-		public static int ScreenResolutionY = 600;
-		public static bool FullScreen = false;
+		public static int screenResolutionX = 800;
+		public static int screenResolutionY = 600;
+		public static bool fullScreen = false;
+		public static int screenWidth = 800;
+		public static int screenHeight = 600;
 
-		// In your Player class, you can use these keys for player controls:
-		// (Default: arcade machine setup:)
-		// PLAYER 1:
-		// WASD:
-		public static int P1Up=87;
-		public static int P1Left=65;
-		public static int P1Down=83;
-		public static int P1Right=68;
-		// FGHVBN:
-		public static int P1Fire1=70;
-		public static int P1Fire2=71;
-		public static int P1Fire3=72;
-		public static int P1Fire4=86;
-		public static int P1Fire5=66;
-		public static int P1Fire6=78;
-
-		// PLAYER 2:
-		// IJKL:
-		public static int P2Up=73;
-		public static int P2Left=74;
-		public static int P2Down=75;
-		public static int P2Right=76;
-		// numpad 1-6:
-		public static int P2Fire1=306;
-		public static int P2Fire2=307;
-		public static int P2Fire3=308;
-		public static int P2Fire4=303;
-		public static int P2Fire5=304;
-		public static int P2Fire6=305;
-
-		// GENERAL BUTTONS:
-		// one,two:
-		public static int Start1P=49;
-		public static int Start2P=50;
-		// enter:
-		public static int Menu=294;
-
+		
 		/// <summary>
 		/// Load new values from the file settings.txt
 		/// </summary>

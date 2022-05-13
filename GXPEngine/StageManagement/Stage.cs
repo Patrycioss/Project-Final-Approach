@@ -82,9 +82,10 @@ namespace GXPEngine.StageManagement
             stageHeight = stageData.Height * tileHeight;
             
             AddChildAt(epilogueManager,0);
+            epilogueManager.SetXY(2460,0);
             
 
-            background = new Sprite("fullBackground.png");
+            background = new Sprite("fullBackground.png",false,false);
             AddChildAt(background,1);
             
             

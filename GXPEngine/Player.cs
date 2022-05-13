@@ -59,6 +59,7 @@ public class Player : Sprite
 		if (upperBodyPart is GrapplingHook grapplingHook)
 		{
 			grapplingHook.hook?.Kill();
+			grapplingHook.pulling = false;
 			StageLoader.currentStage?.drawing.ClearTransparent();
 		}
 
@@ -100,6 +101,19 @@ public class Player : Sprite
 
 	private void Update()
 	{
+		if (x > 3160 && y < 430)
+		{
+			if (StageLoader.currentStage != null)
+			{
+				StageLoader.currentStage.background.Destroy();
+				StageLoader.currentStage.backgroundSprites.Destroy();
+				StageLoader.currentStage.breakableBlocks.Destroy();
+				StageLoader.currentStage.spriteBatch.Destroy();
+				StageLoader.currentStage.epilogueManager.isActive = true;
+			}
+		}
+		
+		
 		if (StageLoader.currentStage is {comicActive: true})
 		{
 			visible = false;
