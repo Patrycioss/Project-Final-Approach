@@ -32,26 +32,10 @@ public class MyGame : Game
 
     private void Update()
     {
-        // if (Input.GetKeyDown(Key.C))
-        // {
-        //     if (StageLoader.currentStage != null)
-        //     {
-        //         StageLoader.currentStage.background.Destroy();
-        //         StageLoader.currentStage.backgroundSprites.Destroy();
-        //         StageLoader.currentStage.breakableBlocks.Destroy();
-        //         StageLoader.currentStage.spriteBatch.Destroy();
-        //         StageLoader.currentStage.epilogueManager.isActive = true;
-        //     }
-        // }
-        
-        
         if (StageLoader.currentStage is {comicActive: true}) return;
         if (player is null) return;
-
-        Console.WriteLine($"PlayerX: {player.x}");
-
+        
         Scroll();
-
 
         //Red
         if (Input.GetKeyDown(Key.NUMPAD_1) || Input.GetKeyDown(Key.Q))

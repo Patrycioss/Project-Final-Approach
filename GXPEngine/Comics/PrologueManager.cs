@@ -49,14 +49,12 @@ public class PrologueManager : Pivot
 			if (pages.Count != 1)
 			{
 				RemoveChild(pages[pages.Count-1]);
-				Console.WriteLine(pages[pages.Count-1]);
 				pages[pages.Count-1].Destroy();
 				pages.RemoveAt(pages.Count-1);
 			}
 			else
 			{
 				RemoveChild(pages[pages.Count-1]);
-				Console.WriteLine(pages[pages.Count-1]);
 				pages[pages.Count-1].Destroy();
 				pages.RemoveAt(pages.Count-1);	
 				

@@ -241,9 +241,6 @@ namespace GXPEngine.BodyParts
             playedSound = 0;
             extendedPart = 0;
             
-            Console.WriteLine(model.height);
-            
-            // model.SetScaleXY(0.5f);
             model.SetXY(0,-16);
             tracks.SetXY(0,model.y);
             
@@ -272,7 +269,6 @@ namespace GXPEngine.BodyParts
 
             Collision? boundaryCollision;
 
-            Console.WriteLine(player.height);
 
             if (Input.GetKey(Key.A) || Input.GetKey(Key.D))
             {
@@ -374,9 +370,6 @@ namespace GXPEngine.BodyParts
                 abilityModel.x = 20;
                 abilityModel.y = -10;
             }
-
-
-            Console.WriteLine(model.currentFrame);
             
             if (model.currentFrame == 39)
             {
