@@ -41,7 +41,7 @@ the puzzles solvable.
 This game was made in 2 weeks with a group for a project for the study Creative Media and Game Technologies at Saxion University of Applied Sciences in Enschede. 
 The game was made in the GXPEngine, an engine made by Saxion. 
 
-##Contributors
+## Contributors
 
 ### Team Leader: Micha Glans
 
