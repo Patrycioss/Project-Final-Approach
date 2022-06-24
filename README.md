@@ -43,7 +43,8 @@ The game was made in the GXPEngine, an engine made by Saxion.
 
 ## Contributors
 
-### Team Leader: Micha Glans
+### Team Leader: 
+* Micha Glans
 
 ### Artists:
 * Dominik Babuščák
