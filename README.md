@@ -5,7 +5,6 @@
 
 
 ## The story
-
 In this game you play as a kid who plays with their broken toys after their parents divorced, the reason these toys are broken is because during the messy divorce
 one of the parents took their sibling with them, in the ensuing fight over the toys the toys fell and broke. Now with only spare parts the kid tries to make
 the best of it.
@@ -36,3 +35,25 @@ the puzzles solvable.
 						 and AD to move horizontally on other surfaces.
 
 * R: Resets the player to start position and full Combination of Jumping Legs (red lower) and Grappling Gun (red upper)
+
+
+## Background Information
+This game was made in 2 weeks with a group for a project for the study Creative Media and Game Technologies at Saxion University of Applied Sciences in Enschede. 
+The game was made in the GXPEngine, an engine made by Saxion. 
+
+##Contributors
+
+### Team Leader: Micha Glans
+
+### Artists:
+* Dominik Babuščák
+* Antoine Marseille
+* Wessel Storm
+
+### Designers:
+* Fanuiel (Rex) Eyob Habte
+* Arlo Groeneveld
+* Khalil (Jeff) Aylabouni
+
+### Engineer:
+* Patrick Schuur (owner of this repository)
