@@ -5,6 +5,8 @@
 
 
 ## The story
+When two parents divorce two siblings get seperated, during the seperation the siblings fight who get what toys. In the fight the toys fall to the ground and break.
+The kids are left with broken toys 
 In this game you play as a kid who plays with their broken toys after their parents divorced, the reason these toys are broken is because during the messy divorce
 one of the parents took their sibling with them, in the ensuing fight over the toys the toys fell and broke. Now with only spare parts the kid tries to make
 the best of it.
@@ -19,22 +21,18 @@ the puzzles solvable.
 
 
 ## Controls
-* Numpad1 or 1: Red upper part (Grappling Gun) --> Click to shoot, when landed click to pull towards it if not landed
+* `Numpad1` or `1` or `e`: Monkey Plushie (Grappling Gun) --> Click to shoot, when landed click to pull towards it if not landed
 						 click to cancel it, if when being pulled you can also click to cancel.
 
-* Numpad2 or 2: Red lower part (Jumping Legs) --> Press space to jump and AD to move horizontally
+* `Numpad2` or `2`: Jumpy Legs --> Press `space` to jump and `A` & `D` to walk horizontally.
 
-* Numpad3 or 3: Blue upper part (NO FUNCTIONALITY)
+* `Numpad3` or `3` or `r`: Mechanical Puncher --> `Click` to punch and break objects.
 
+* `Numpad4` or `4`: Extendy Legs --> Use `UPARROW` & `DOWNARROW` or `A` & `D` to move horizontally
 
-* Numpad4 or 4: Blue lower part (Extendy Legs) --> Use UP and DOWN arrow keys and AD to move horizontally
+* `Numpad6` or `6`: Spider Legs --> Use `WASD` to move over the cobwebs and `A` & `D` to move horizontally on other surfaces.
 
-* Numpad5 or 5: Green upper part (NO FUNCTIONALITY)
-
-* Numpad6 or 6: Green lower part (Spider Legs) --> Use WASD to move over the background tiles (CHECKER) 
-						 and AD to move horizontally on other surfaces.
-
-* R: Resets the player to start position and full Combination of Jumping Legs (red lower) and Grappling Gun (red upper)
+* `R`: Resets the player to the start of the level (for if something breaks).
 
 
 ## Background Information
