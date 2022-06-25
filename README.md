@@ -5,11 +5,9 @@
 
 
 ## The story
-When two parents divorce two siblings get seperated, during the seperation the siblings fight who get what toys. In the fight the toys fall to the ground and break.
-The kids are left with broken toys 
-In this game you play as a kid who plays with their broken toys after their parents divorced, the reason these toys are broken is because during the messy divorce
-one of the parents took their sibling with them, in the ensuing fight over the toys the toys fell and broke. Now with only spare parts the kid tries to make
-the best of it.
+When two parents divorce two siblings get seperated, during the seperation the siblings fight who get what toys. In the fight the toys fall to the ground and break. Thus the kids are left with broken toys. In this game you play as one of the siblings trying to 
+play with their broken toys. 
+
 
 ![fighting](https://user-images.githubusercontent.com/72610925/175645724-26ff29ef-3564-4485-aa81-15736944d432.png)
 
@@ -21,19 +19,14 @@ the puzzles solvable.
 
 
 ## Controls
-* `Numpad1` or `1` or `e`: Monkey Plushie (Grappling Gun) --> Click to shoot, when landed click to pull towards it if not landed
-						 click to cancel it, if when being pulled you can also click to cancel.
-
-* `Numpad2` or `2`: Jumpy Legs --> Press `space` to jump and `A` & `D` to walk horizontally.
-
-* `Numpad3` or `3` or `r`: Mechanical Puncher --> `Click` to punch and break objects.
-
-* `Numpad4` or `4`: Extendy Legs --> Use `UPARROW` & `DOWNARROW` or `A` & `D` to move horizontally
-
-* `Numpad6` or `6`: Spider Legs --> Use `WASD` to move over the cobwebs and `A` & `D` to move horizontally on other surfaces.
-
-* `R`: Resets the player to the start of the level (for if something breaks).
-
+| Part               | Ability          | Equip | Use                                             |
+|--------------------|------------------|-------|-------------------------------------------------|
+| Monkey Plushie     | Grappling Hook   | `E`   | `LMB` to shoot and `RMB` to cancel              |
+| Mechanical Puncher | Punch            | `R`   | `LMB` to punch                                  |
+| Jumping Legs       | Jump             | `1`   | `SPACE` to jump                                 |
+| Extendy Legs       | Extend           | `2`   | `W` to ascend `A` to descend, `A` & `D` to walk |
+| Spider Legs        | Climb on cobwebs | `3`   | `WASD` in climbing mode, `A`& `D` to walk       |
+| -                  | Reset            | -     | `R`                                             |
 
 ## Background Information
 This game was made in 2 weeks with a group for a project for the study Creative Media and Game Technologies at Saxion University of Applied Sciences in Enschede. 
