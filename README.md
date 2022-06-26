@@ -35,17 +35,17 @@ The game was made in the GXPEngine, an engine made by Saxion.
 ## Contributors
 
 ### Team Leader: 
-* Micha Glans
+* Micha Glans (environment art and scrum)
 
 ### Artists:
-* Dominik Babuščák
-* Antoine Marseille
-* Wessel Storm
+* Dominik Babuščák (character art, environment art and comic art)
+* Antoine Marseille (environment art)
+* Wessel Storm (character and environment art)
 
 ### Designers:
-* Fanuiel (Rex) Eyob Habte
-* Arlo Groeneveld
-* Khalil (Jeff) Aylabouni
+* Fanuiel (Rex) Eyob Habte (website)
+* Arlo Groeneveld (level & gameplay design)
+* Khalil (Jeff) Aylabouni (story and gameplay)
 
 ### Engineer:
-* Patrick Schuur (owner of this repository)
+* Patrick Schuur (owner of this repository and main programmer)
